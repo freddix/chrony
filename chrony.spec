@@ -1,7 +1,7 @@
 Summary:	An NTP client/server
 Name:		chrony
 Version:	1.26
-Release:	3
+Release:	4
 License:	GPL v2
 Group:		Daemons
 Source0:	http://download.tuxfamily.org/chrony/%{name}-%{version}.tar.gz
@@ -70,14 +70,14 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 [ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
-%systemd_post chronyd.service chrony-wait.service
+%systemd_post chronyd.service
 
 %preun
-%systemd_preun chronyd.service chrony-wait.service
+%systemd_preun chronyd.service
 
 %postun
 [ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
-%systemd_reload
+%systemd_postun
 if [ "$1" = "0" ]; then
 	%userremove ntp
 	%groupremove ntp
