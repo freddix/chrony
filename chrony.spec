@@ -1,7 +1,7 @@
 Summary:	An NTP client/server
 Name:		chrony
 Version:	1.26
-Release:	4
+Release:	5
 License:	GPL v2
 Group:		Daemons
 Source0:	http://download.tuxfamily.org/chrony/%{name}-%{version}.tar.gz
@@ -49,7 +49,7 @@ export CPPFLAGS="%{rpmcppflags}"
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_sysconfdir},/var/{lib/ntp,log/chrony}} \
-	$RPM_BUILD_ROOT%{systemdunitdir}
+	$RPM_BUILD_ROOT%{_prefix}/lib/systemd/{system,ntp-units.d}
 
 %{__make} install install-docs \
 	DESTDIR=$RPM_BUILD_ROOT
@@ -58,6 +58,8 @@ rm -rf $RPM_BUILD_ROOT%{_docdir}
 
 cp -a %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/chrony.conf
 cp -a %{SOURCE2} %{SOURCE3} $RPM_BUILD_ROOT%{systemdunitdir}
+
+echo 'chronyd.service' > $RPM_BUILD_ROOT%{_prefix}/lib/systemd/ntp-units.d/50-chronyd.list
 
 touch $RPM_BUILD_ROOT%{_localstatedir}/lib/ntp/{drift,rtc}
 
@@ -91,6 +93,7 @@ fi
 %attr(755,root,root) %{_bindir}/chronyc
 %attr(755,root,root) %{_sbindir}/chronyd
 %{systemdunitdir}/*.service
+%{_prefix}/lib/systemd/ntp-units.d/50-chronyd.list
 %{_mandir}/man[1,5,8]/chrony*.*
 %{_infodir}/chrony.info*
 
