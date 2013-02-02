@@ -1,11 +1,11 @@
 Summary:	An NTP client/server
 Name:		chrony
-Version:	1.26
-Release:	5
+Version:	1.27
+Release:	1
 License:	GPL v2
 Group:		Daemons
 Source0:	http://download.tuxfamily.org/chrony/%{name}-%{version}.tar.gz
-# Source0-md5:	ad6dd619ff1986e4ff780363c64e2246
+# Source0-md5:	0c2ae73f7e8ddfe31eeafc803818b9e4
 Source1:	%{name}.conf
 Source2:	%{name}d.service
 Source3:	%{name}-wait.service
