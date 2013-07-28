@@ -1,11 +1,11 @@
 Summary:	An NTP client/server
 Name:		chrony
-Version:	1.27
+Version:	1.28
 Release:	1
 License:	GPL v2
 Group:		Daemons
 Source0:	http://download.tuxfamily.org/chrony/%{name}-%{version}.tar.gz
-# Source0-md5:	0c2ae73f7e8ddfe31eeafc803818b9e4
+# Source0-md5:	d11dd205cd8837ae49f065e42a84f363
 Source1:	%{name}.conf
 Source2:	%{name}d.service
 Source3:	%{name}-wait.service
@@ -30,7 +30,7 @@ of the system clock on a computer.
 %prep
 %setup -q
 
-%{__sed} -i -e 's,/usr/local,%{_prefix},g' *.texi
+%{__sed} -i -e 's,/usr/local,%{_prefix},g' *.texi.in
 
 %build
 export CC="%{__cc}"
